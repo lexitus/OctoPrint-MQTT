@@ -298,7 +298,7 @@ class MqttPlugin(octoprint.plugin.SettingsPlugin,
         else:
             protocol = mqtt.MQTTv31
 
-        if self._mqtt is None:
+        if self._mqtt is None or broker_tls: # Need to recreate client in case TLS settings have changed
             self._mqtt = mqtt.Client(client_id=client_id, protocol=protocol, clean_session=clean_session)
 
         if broker_username is not None:
